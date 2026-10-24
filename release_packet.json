@@ -1,0 +1,23 @@
+{
+ "case":"DOC-17",
+ "synthetic":true,
+ "release":"1.5.0-rc1",
+ "source_commit":"DEMO-COMMIT-015-NOT-A-REAL-GIT-ID",
+ "package":"app-1.5.0-rc1.zip",
+ "schema_before":"S1",
+ "schema_after":"S2",
+ "migration":"M015",
+ "config":{"APP_PORT":8081,"DB_HOST":"lab-db-01","DB_NAME":"service_lab","ATTACHMENTS_DIR":"/srv/service_lab/attachments","max_attachments":3},
+ "operator_guide":{"version":"1.4.2","max_attachments":5,"network_timeout_advice":"Нажимайте Отправить до появления номера"},
+ "tests":[
+  {"id":"T01","requirement":"R_CREATE","status":"passed","evidence":"synthetic-log-E01"},
+  {"id":"T02","requirement":"R_ACCESS","status":"passed","evidence":"synthetic-log-E02"},
+  {"id":"T03","requirement":"R_IDEMPOTENCY","status":"passed","evidence":"synthetic-log-E03"},
+  {"id":"T04","requirement":"R_RESTORE","status":"blocked","evidence":"restore-target-unavailable"},
+  {"id":"T05","requirement":"R_PERFORMANCE","status":"not_run","evidence":null}
+ ],
+ "backup":{"id":"B-1755","includes":["database","attachments","config"],"last_restore_test":"not_available_in_packet"},
+ "requirements":{"R_CREATE":"заявка сохраняется и читается","R_ACCESS":"чужая заявка недоступна","R_IDEMPOTENCY":"повтор не создает дубль","R_RESTORE":"RTO не более20минут и RPO не более15минут","R_PERFORMANCE":"успех не ниже99процентов и p95 не выше800мс"},
+ "window":{"start":"18:00","end":"18:30","return_minutes":8},
+ "roles":{"release_owner":"teacher_release","technical_executor":"student_engineer","test_owner":"student_tester","acceptance_owner":"teacher_process","support":"student_support"}
+}
